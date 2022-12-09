@@ -43,8 +43,9 @@ import ipdb
                          [(7,'Tynkoff','BYBYBYB', 0),
                           (8,'Tyn word','BYBBYBYB', 0),
                           (8,'Tyn word','BBBBYBYB', 1),
-                          (8,'Ty wo rd','BYBBYBYB', 0),
-                          (8,'Ty wo rd','BYBBBBBB', 2)])
+                          (8,'Ty wo rd','BYBBYBYB', 1),
+                          (8,'Ty wo rd','BYBBBBBB', 2),
+                          (11,'Наш общий дом', 'YBYYYBBYYBY', 1)])
 def test_solution(nn,ss,bb, expected):
     assert print_words(nn,ss,bb) == expected
 
@@ -57,72 +58,38 @@ def print_words(nn: int, ss: str, bb: str) -> int:
     words = ss.split(" ")
     print(words)
     
-    # составляем соттвествуйщие слова цветов
+    # составляем соответствующие слова цветов
     color_words_list = []
     
     index = 0
     for word in words:
         color_word = bb[index:len(word)+index]
         color_words_list.append(color_word)
-        index = len(word)+1
+        index = len(word) + index  # + 1  # 1 это для пробела
      
 
     print(color_words_list)
 
-    #cnt = [ counter+=1 for i in color_words_list if (("BB" in i) or ("YY" in i)) ]
+    counter_bad_words = len([ i for i in color_words_list if (("BB" in i) or ("YY" in i)) ])
+    # print(f"cnt = {counter_bad_words} and len in {len(counter_bad_words)}")
 
-    for i in color_words_list:
-        if (("BB" in i) or ("YY" in i)):
-            counter_bad_words += 1
+    # for i in color_words_list:
+    #     if (("BB" in i) or ("YY" in i)):
+    #         counter_bad_words += 1
     
-    print(counter_bad_words)
+    #print(counter_bad_words)
     
     return counter_bad_words
     
-    # находим индексы пробелов
-    # import ipdb; ipdb.set_trace()
-    
-    
-    # if ' ' in ss:
-        
-    #     #print(ss.index(' '))
-        
-    #     # строка, соответствуюшая текущему слову
-    #     current_word = ""
-    #     for i in range(nn):
-    #         print(f"{ss[i]} {bb[i]}")
-            
-            
-    #         #  слово отделенное пробелом или последнее слово
-    #         if ' ' == ss[i] or i == nn-1:
-    #             #import ipdb; ipdb.set_trace() 
-    #             if ("BB" in current_word) or ("YY" in current_word):
-    #                 counter_bad_words += 1 
-    #                 print("+ bad word")
-    #             current_word = ""   
-    #             print("\n")  
-    #         else:            
-    #             current_word += bb[i]
-    #         print(current_word)
-                    
-    #     print(counter_bad_words)
-    #     return counter_bad_words
-            
-    # если только одно слово 
-    # else:
-    #     if ("BB" in ss) or ("YY" in ss):
-    #         return 1
-    #     # одно слово и оно красивое
-    #     else:
-    #         return 0
-
+ 
 if __name__ == "__main__":
     #print_words(8,'Tyn word','BBBBYBYB')
     #print_words(8,'Ty wo rd','BYBBBBBB')
-    print_words(8,'Ty wo rd','BYBBYBYB')
+    #print_words(8,'Ty wo rd','BYBBYBYB')
     #print_words(7,'Tynword','BBBBBYB')
     #print_words(7,'Tynword','BYBYBYB')
-    #print_words(7,'Algorithms and Data Structures','BBBBBBBBBBBYBYYYYBBBBBBBBB')
+    print_words(27,'Algorithms and Data Structures','BBBBBBBBBBBYBYYYYBBBBBBBBB')
+    print_words(11,'Наш общий дом', 'YBYYYBBYYBY' )
     
     
     #print("\n")
